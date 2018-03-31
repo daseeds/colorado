@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/daseeds/colorado.svg?style=svg)](https://circleci.com/gh/daseeds/colorado) [![Code Climate](https://codeclimate.com/github/daseeds/colorado/badges/gpa.svg)](https://codeclimate.com/github/daseeds/colorado) [![Test Coverage](https://codeclimate.com/github/daseeds/colorado/badges/coverage.svg)](https://codeclimate.com/github/daseeds/colorado/coverage)
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
