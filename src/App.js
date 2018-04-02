@@ -31,15 +31,21 @@ class PageRow extends React.Component {
 
 class PagesTable extends React.Component {
   render() {
+    const filterText = this.props.filterText;
     const rows = [];
     let lastName = null;
+    let categoryKey = null;
 
     this.props.pages.forEach((page) => {
+      if (page.name.indexOf(filterText) === -1) {
+        return;
+      }
       if (page.name !== lastName) {
+        categoryKey = page.name + "-header"
         rows.push(
           <PagesNameRow
             name={page.name}
-            key={page.name} />
+            key={categoryKey} />
         );
       }
       rows.push(
@@ -65,21 +71,58 @@ class PagesTable extends React.Component {
 }
 
 class SearchBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+  }
+
+  handleFilterTextChange(e) {
+    this.props.onFilterTextChange(e.target.value);
+  }
+
   render() {
+    const filterText = this.props.filterText;
+
     return (
       <form>
-        <input type="text" placeholder="Search..." />
+        <input
+          type="text"
+          placeholder="Search..."
+          value={filterText}
+          onChange={this.handleFilterTextChange} />
       </form>
     );
   }
 }
 
 class FilterablePageTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filterText: '',
+    };
+
+  this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+
+  }
+
+  handleFilterTextChange(filterText) {
+    this.setState({
+      filterText: filterText
+    });
+  }
+
   render() {
     return (
       <div>
-        <SearchBar />
-        <PagesTable pages={this.props.pages} />
+        <SearchBar
+          filterText={this.state.filterText}
+          onFilterTextChange={this.handleFilterTextChange}
+        />
+        <PagesTable
+          pages={this.props.pages}
+          filterText={this.state.filterText}
+        />
       </div>
     );
   }
